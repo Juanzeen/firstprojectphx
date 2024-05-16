@@ -14,10 +14,17 @@ defmodule TodomvcWeb.Router do
     plug :accepts, ["json"]
   end
 
+  #onde definimos as nossas rotas
+
+
   scope "/", TodomvcWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    #get "/", PageController, :home
+    #esse get não era uma liveview, para fazer uma liveview declaramos a linha abaixo
+    #criamos uma pasta chamada live e dentro dela criamos um arquivo que declara o módulo
+    #TodoLive
+    live "/", TodoLive, :index
   end
 
   # Other scopes may use custom stacks.

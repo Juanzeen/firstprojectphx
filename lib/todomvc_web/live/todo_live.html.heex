@@ -1,0 +1,18 @@
+<div>
+    <p>ToDos</p>
+
+<!--Usamos a sintaxe do @ para dizer que todos é uma assign
+após isso criamos uma variável local, sem o @, é o que fica dentro da nossa li -->
+
+    <ul>
+       <%= for todo <- @filtered_todos do %>
+            <li><%=todo.message%> (<%= if todo.completed?, do: "Finalizado", else: "Pendente"%>)</li>
+       <%end%>
+    </ul>
+
+    <h2>Change filter</h2>
+    <button phx-click="change_filter" phx-value-filter="all">Todos</button>
+    <button phx-click="change_filter" phx-value-filter="active">ativos</button>
+    <button phx-click="change_filter" phx-value-filter="finished">finalizados</button>
+</div>
+
