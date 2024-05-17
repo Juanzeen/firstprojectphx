@@ -41,6 +41,27 @@ defmodule TodomvcWeb.TodoLive do
         {:noreply, socket}
   end
 
+  def handle_event("todo_form_submit", %{"new_todo" => %{"message" => message}}, socket) do
+    new_todo = %{message: message, completed?: false}
+
+    socket =
+      socket
+      |> assign(:todos, [new_todo] ++ socket.assigns.todos)
+      {:noreply, socket}
+  end
+#declarando um componente
+  def filter_button(assigns) do
+    ~H"""
+     <button
+      phx-click="change_filter"
+      phx-value-filter={@filter}
+      class="bg-slate-500 px-4 py-2 rounded-md hover:bg-slate-700 transition-all"
+     >
+      <%= @label%>
+      </button>
+    """
+  end
+
   #ENTENDENDO A FUNÇÃO RENDER
   #declaramos aqui um render, que é o que diz para o phoenix como queremos renderizar o HTML
   #live_view é uma lib dentro do phoenix para criar front end interativo

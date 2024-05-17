@@ -1,18 +1,38 @@
-<div>
-    <p>ToDos</p>
+<div class ="flex flex-1 flex-col justify-around items-center w-9/12 h-6/12 mx-auto">
+    <p class="text-4xl ">ToDos</p>
 
 <!--Usamos a sintaxe do @ para dizer que todos é uma assign
-após isso criamos uma variável local, sem o @, é o que fica dentro da nossa li -->
+após isso criamos uma variável local, sem o @, é o que fica dentro da nossa li 
 
-    <ul>
+criando o .form: Primeiro declaramos o form com .;
+o for diz para o que serve o formulário, nesse caso dizemos que sao para novas todos
+por fim recebemos uma variavel no let, chamada de f, que representa o estado atual do form
+podemos ter quantos itens quisermos, desde que a chave dos itens sejam diferentes
+-->
+
+<.form for={@new_todo} phx-submit="todo_form_submit" :let={f}>
+    <input type="text"/>
+  </.form>
+
+    <ul class= "list-disc my-5">
        <%= for todo <- @filtered_todos do %>
-            <li><%=todo.message%> (<%= if todo.completed?, do: "Finalizado", else: "Pendente"%>)</li>
+            <li>
+                <%=todo.message%> 
+                (<%= if todo.completed?, do: "Finalizado", else: "Pendente"%>)
+            </li>
        <%end%>
     </ul>
 
-    <h2>Change filter</h2>
-    <button phx-click="change_filter" phx-value-filter="all" class="bg-slate-500 px-4 py-2 rounded-md hover:bg-slate-700 transition-all">Todos</button>
-    <button phx-click="change_filter" phx-value-filter="active" class="bg-slate-500 px-4 py-2 rounded-md hover:bg-slate-700 transition-all">Ativos</button>
-    <button phx-click="change_filter" phx-value-filter="finished" class="bg-slate-500 px-4 py-2 rounded-md hover:bg-slate-700 transition-all">Finalizados</button>
+    <h2 class="mb-3 italic text-xl opacity-70">Change filter</h2>
+    <!--invocando um componente
+        podemos passar propriedades no componente no HTML que
+        no ex serão entendidas como assigns
+    -->
+    <div class="flex flex-row justify-around items-center w-10/12">    
+        <.filter_button current_filter = {@filter} filter ="all" label="Todos" />
+        <.filter_button current_filter = {@filter} filter ="active" label="Active" />
+        <.filter_button current_filter = {@filter} filter ="finished" label="Finished"/>
+    </div>
+        
 </div>
 
